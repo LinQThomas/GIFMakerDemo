@@ -13,11 +13,10 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/grid_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,9 +50,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/delay_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="帧间隔时长" />
+                android:text="帧间隔时长：500ms" />
 
             <SeekBar
                 android:id="@+id/delay_bar"
