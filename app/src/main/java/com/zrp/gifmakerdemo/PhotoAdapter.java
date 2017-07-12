@@ -1,7 +1,6 @@
 package com.zrp.gifmakerdemo;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -63,7 +65,7 @@ public class PhotoAdapter extends BaseAdapter {
         }
 
         if (list == null || position >= list.size()) {
-            holder.image_view.setImageResource(R.drawable.icon_plus);
+            Glide.with(context).load(R.drawable.icon_plus).into(holder.image_view);
             holder.image_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -73,7 +75,7 @@ public class PhotoAdapter extends BaseAdapter {
         } else {
             //加载本地uri资源
             Log.d("photoAdapter", "getView: ---->" + getItem(position));
-            holder.image_view.setImageURI(Uri.parse(getItem(position)));
+            Glide.with(context).load(new File(getItem(position))).into(holder.image_view);
         }
 
         return convertView;

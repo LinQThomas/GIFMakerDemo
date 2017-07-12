@@ -14,11 +14,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zrp.gifmakerdemo.gifmaker.AnimatedGifEncoder;
 
 import java.io.ByteArrayOutputStream;
@@ -28,13 +30,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView delay_text;
-    private GifImageView gif_image;
+    private ImageView gif_image;
     private EditText file_text;
 
     public static final String TAG = "MainActivity";
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GridView grid_view = (GridView) findViewById(R.id.grid_view);
         file_text = (EditText) findViewById(R.id.file_text);
         SeekBar delay_bar = (SeekBar) findViewById(R.id.delay_bar);
-        gif_image = (GifImageView) findViewById(R.id.gif_image);
+        gif_image = (ImageView) findViewById(R.id.gif_image);
         delay_text = (TextView) findViewById(R.id.delay_text);
         findViewById(R.id.generate).setOnClickListener(this);
         findViewById(R.id.clear).setOnClickListener(this);
@@ -162,12 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    GifDrawable gifDrawable = new GifDrawable(path);
-                    gif_image.setImageDrawable(gifDrawable);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Glide.with(MainActivity.this).load(new File(path)).into(gif_image);
                 Toast.makeText(MainActivity.this, "Gif已生成。保存路径：\n" + path, Toast.LENGTH_LONG).show();
             }
         });
