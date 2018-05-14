@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                Glide.with(MainActivity.this).clear(gif_image);
                 Glide.with(MainActivity.this).load(new File(path)).into(gif_image);
                 Toast.makeText(MainActivity.this, "Gif已生成。保存路径：\n" + path, Toast.LENGTH_LONG).show();
             }
